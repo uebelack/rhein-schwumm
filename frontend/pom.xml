@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.example</groupId>
+    <artifactId>rhein-schwumm</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>rhein-schwumm-frontend</artifactId>
+  <packaging>jar</packaging>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>dist/rhein-schwumm</directory>
+        <targetPath>.</targetPath>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <configuration>
+          <filesets>
+            <fileset>
+              <directory>dist</directory>
+              <includes>
+                <include>*</include>
+              </includes>
+            </fileset>
+          </filesets>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.github.eirslett</groupId>
+        <artifactId>frontend-maven-plugin</artifactId>
+        <version>1.12.1</version>
+        <executions>
+          <execution>
+            <id>install node and npm</id>
+            <goals>
+              <goal>install-node-and-yarn</goal>
+            </goals>
+            <configuration>
+              <nodeVersion>v18.15.0</nodeVersion>
+              <yarnVersion>v1.22.19</yarnVersion>
+            </configuration>
+            <phase>generate-sources</phase>
+          </execution>
+          <execution>
+            <id>yarn install</id>
+            <goals>
+              <goal>yarn</goal>
+            </goals>
+            <configuration>
+              <arguments>install</arguments>
+            </configuration>
+            <phase>process-sources</phase>
+          </execution>
+          <execution>
+            <id>yarn lint</id>
+            <goals>
+              <goal>yarn</goal>
+            </goals>
+            <configuration>
+              <arguments>lint --fix</arguments>
+            </configuration>
+            <phase>generate-resources</phase>
+          </execution>
+          <execution>
+            <id>yarn test</id>
+            <goals>
+              <goal>yarn</goal>
+            </goals>
+            <configuration>
+              <arguments>test</arguments>
+              <environmentVariables>
+                <TEST_REPORT_PATH>target/test-reports</TEST_REPORT_PATH>
+                <TEST_REPORT_FILENAME>TEST-angular.xml</TEST_REPORT_FILENAME>
+              </environmentVariables>
+            </configuration>
+            <phase>test</phase>
+          </execution>
+          <execution>
+            <id>yarn build</id>
+            <goals>
+              <goal>yarn</goal>
+            </goals>
+            <configuration>
+              <arguments>build</arguments>
+            </configuration>
+            <phase>generate-resources</phase>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
