@@ -1,1 +1,8 @@
-Hallo Welt
+<main>
+  <div class="wrapper">
+    <h1>Rhein Schwumm</h1>
+    <p>Die aktuelle Rhein Temperature beträgt:</p>
+    <div class="temperature">{{ rheinTemperature?.temperature }} <span *ngIf="rheinTemperature !== undefined">°C</span></div>
+    <div class="timestamp">{{ rheinTemperature?.timestamp }}</div>
+  </div>
+</main>
