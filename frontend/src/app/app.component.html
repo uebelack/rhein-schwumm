@@ -4,5 +4,6 @@
     <p>Die aktuelle Rhein Temperature beträgt:</p>
     <div class="temperature">{{ rheinTemperature?.temperature }} <span *ngIf="rheinTemperature !== undefined">°C</span></div>
     <div class="timestamp">{{ rheinTemperature?.timestamp }}</div>
+    <div class="error">{{ error }}</div>
   </div>
 </main>

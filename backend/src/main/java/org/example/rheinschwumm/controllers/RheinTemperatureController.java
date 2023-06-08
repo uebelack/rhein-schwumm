@@ -1,6 +1,7 @@
 package org.example.rheinschwumm.controllers;
 
 
+import org.example.rheinschwumm.exceptions.RheinTemperatureException;
 import org.example.rheinschwumm.models.RheinTemperature;
 import org.example.rheinschwumm.services.RheinTemperatureService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class RheinTemperatureController {
     }
 
     @GetMapping("/api/rhein-temperature")
-    public RheinTemperature getRheinTemperature() {
+    public RheinTemperature getRheinTemperature() throws RheinTemperatureException {
         return rheinTemperatureService.getRheinTemperature();
     }
 }

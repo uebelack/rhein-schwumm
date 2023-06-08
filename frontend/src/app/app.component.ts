@@ -10,9 +10,14 @@ import { RheinTemperature } from './rhein-temperature';
 export class AppComponent {
   rheinTemperature?: RheinTemperature;
 
+  error?: string;
+
   constructor(private httpClient: HttpClient) {
-    httpClient.get('/api/rhein-temperature').subscribe((data) => {
-      this.rheinTemperature = data as RheinTemperature;
-    });
+    httpClient.get('/api/rhein-temperature')
+      .subscribe((data) => {
+        this.rheinTemperature = data as RheinTemperature;
+      }, (error) => {
+        this.error = error.error.error;
+      });
   }
 }

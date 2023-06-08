@@ -1,12 +1,12 @@
 package org.example.rheinschwumm.apis;
 
+import org.example.rheinschwumm.exceptions.OpenDataBaselStadtApiException;
 import org.example.rheinschwumm.models.RheinTemperature;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -15,13 +15,12 @@ import java.time.ZonedDateTime;
 
 @Component
 public class OpenDataBaselStadtApi {
-    private static final Logger logger = LoggerFactory.getLogger(OpenDataBaselStadtApi.class);
     private static final String ENDPOINT = "https://data.bs.ch/api/records/1.0/search/?dataset=100046&q=&rows=1&sort=startzeitpunkt&facet=startzeitpunkt";
 
-    @Value("${open-data-basel-stadt.api-key}")
+    @Value("${open-data-basel-stadt.api-key:}")
     private String apiKey;
 
-    public RheinTemperature getRheinTemperature() {
+    public RheinTemperature getRheinTemperature() throws OpenDataBaselStadtApiException {
 
         try {
             HttpClient client = HttpClient.newHttpClient();
@@ -42,15 +41,12 @@ public class OpenDataBaselStadtApi {
                 Double temperature = record.getJSONObject("fields").getDouble("rus_w_o_s3_te");
                 return new RheinTemperature(timestamp, temperature);
             } else {
-                // handle the error response
-                logger.error("HTTP error " +
-                        response.statusCode() +
-                        ": " + response.body());
+                throw new OpenDataBaselStadtApiException("Could not get Rhein temperature, got status code " + response.statusCode());
             }
-        } catch (Exception e) {
-            logger.error("Error: " + e.getMessage());
+        } catch (IOException e) {
+            throw new OpenDataBaselStadtApiException("Could not get Rhein temperature", e);
+        } catch (InterruptedException e) {
+            throw new OpenDataBaselStadtApiException("Could not get Rhein temperature", e);
         }
-
-        return null;
     }
 }
