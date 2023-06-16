@@ -18,4 +18,16 @@ jobs:
           cache: maven
       - name: Maven
         run: |
-          mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=uebelack_rhein-schwumm --fail-at-end
+          mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar --fail-at-end
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Cache Node modules
+        uses: actions/cache@v3
+        with:
+          path: frontend/node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('${{ inputs.path }}/yarn.lock') }}
+          restore-keys: ${{ runner.os }}-node_modules

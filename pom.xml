@@ -19,7 +19,28 @@
 
   <properties>
     <java.version>17</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <sonar.organization>uebelack</sonar.organization>
+    <sonar.projectKey>rhein-schwumm</sonar.projectKey>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <sonar.javascript.lcov.reportPaths>
+            ${project.basedir}/coverage/lcov.info
+    </sonar.javascript.lcov.reportPaths>
+    <sonar.sources>.</sonar.sources>
+    <sonar.inclusions>
+            src/main/**,
+            src/app/**
+    </sonar.inclusions>
+    <sonar.exclusions>
+            node_modules/**,
+    </sonar.exclusions>
+    <sonar.tests>.</sonar.tests>
+    <sonar.test.inclusions>
+            src/test/**,
+            src/**/*.spec.ts
+    </sonar.test.inclusions>
   </properties>
+
 
   <modules>
     <module>backend</module>
