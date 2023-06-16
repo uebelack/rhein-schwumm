@@ -1,0 +1,13 @@
+{
+  "name": "rhein-schwumm",
+  "version": "0.0.1",
+  "repository": "git@github.com:uebelack/rhein-schwumm.git",
+  "license": "MIT",
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
+  },
+  "dependencies": {
+    "cypress": "^12.14.0"
+  }
+}

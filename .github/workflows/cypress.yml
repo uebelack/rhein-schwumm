@@ -1,0 +1,26 @@
+name: "Cypress"
+on: 
+  push:
+    branches: '*'
+
+jobs:
+  test:
+    name: Run Cypress tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: temurin
+          cache: maven
+      - name: Maven
+        run: mvn -B install -DskipTests
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
+        with:
+          start: java -jar backend/target/rhein-schwumm-backend-0.0.1-SNAPSHOT.jar
+          record: false
+          wait-on: "http://localhost:8080"

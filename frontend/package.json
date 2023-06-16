@@ -1,6 +1,7 @@
 {
   "name": "rhein-schwumm",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.config.json",
@@ -25,16 +26,16 @@
   },
   "devDependencies": {
     "@angular-builders/jest": "15.0.0",
+    "@angular-devkit/build-angular": "^15.2.1",
     "@angular-eslint/builder": "15.2.1",
     "@angular-eslint/eslint-plugin": "15.2.1",
     "@angular-eslint/eslint-plugin-template": "15.2.1",
     "@angular-eslint/schematics": "15.2.1",
     "@angular-eslint/template-parser": "15.2.1",
-    "@angular-devkit/build-angular": "^15.2.1",
     "@angular/cli": "~15.2.1",
     "@angular/compiler-cli": "^15.2.0",
-    "@testing-library/angular": "^13.4.0",
     "@briebug/jest-schematic": "^6.0.0",
+    "@testing-library/angular": "^13.4.0",
     "@types/jest": "29.4.2",
     "@typescript-eslint/eslint-plugin": "5.48.2",
     "@typescript-eslint/parser": "5.48.2",
@@ -47,6 +48,7 @@
     "jest": "28.1.3",
     "jest-junit-reporter": "^1.1.0",
     "mkdirp": "^2.1.6",
+    "ng-mocks": "^14.11.0",
     "prettier": "^2.8.4",
     "prettier-eslint": "^15.0.1",
     "typescript": "~4.9.4"
